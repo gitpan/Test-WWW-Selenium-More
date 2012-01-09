@@ -1,0 +1,11 @@
+LICENSE
+MANIFEST
+META.yml
+Makefile.PL
+dist.ini
+lib/Test/WWW/Selenium/More.pm
+lib/Test/WWW/Selenium/More/Manual.pod
+t/author-critic.t
+t/release-pod-coverage.t
+t/release-pod-syntax.t
+t/testful.t

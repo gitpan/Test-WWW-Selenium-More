@@ -1,0 +1,27 @@
+---
+abstract: 'Useful methods for Selenium testing'
+author:
+  - 'Eric Johnson <kablamo at iijo dot nospamthanks dot org>'
+build_requires:
+  English: 0
+  Test::More: 0
+  Test::Most: 0
+  WWW::Selenium::Util: 0
+  strict: 0
+  warnings: 0
+configure_requires:
+  ExtUtils::MakeMaker: 6.30
+dynamic_config: 0
+generated_by: 'Dist::Zilla version 4.300000, CPAN::Meta::Converter version 2.110440'
+license: perl
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: Test-WWW-Selenium-More
+requires:
+  Carp: 0
+  Moose: 0
+  Test::WWW::Selenium: 0
+  namespace::autoclean: 0
+  perl: 5.010
+version: 0.001
