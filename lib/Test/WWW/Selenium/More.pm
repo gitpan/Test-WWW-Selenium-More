@@ -1,6 +1,6 @@
 package Test::WWW::Selenium::More;
 {
-  $Test::WWW::Selenium::More::VERSION = '0.002';
+  $Test::WWW::Selenium::More::VERSION = '0.08';
 }
 
 use Carp;
@@ -330,7 +330,7 @@ Test::WWW::Selenium::More - More useful tools for Selenium testing
 
 =head1 VERSION
 
-version 0.002
+version 0.08
 
 =head1 SYNOPSIS
 

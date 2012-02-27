@@ -32,7 +32,7 @@ my %WriteMakefileArgs = (
     "Test::WWW::Selenium" => 0,
     "namespace::autoclean" => 0
   },
-  "VERSION" => "0.002",
+  "VERSION" => "0.08",
   "test" => {
     "TESTS" => "t/*.t"
   }
