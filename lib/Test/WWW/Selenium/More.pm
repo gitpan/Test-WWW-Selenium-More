@@ -1,11 +1,14 @@
 package Test::WWW::Selenium::More;
+{
+  $Test::WWW::Selenium::More::VERSION = '0.002';
+}
 
 use Carp;
 use Moose;
 use Test::WWW::Selenium;
 use namespace::autoclean;
 
-our $VERSION = '0.07';
+# ABSTRACT: More useful tools for Selenium testing
 
 
 has host    => ( is => 'rw', isa => 'Str', builder => '_host' );
@@ -311,7 +314,6 @@ sub change_speed {
     return $self;
 }
 
-
 1;
 
 # I used this command to get the list of functions in WWW::Selenium:
@@ -324,24 +326,13 @@ sub change_speed {
 
 =head1 NAME
 
-Test::WWW::Selenium::More
+Test::WWW::Selenium::More - More useful tools for Selenium testing
 
 =head1 VERSION
 
-version 0.001
+version 0.002
 
-=head1 DESCRIPTION
-
-This library extends Test::WWW::Selenium.   Please see that module's
-documentation.
-
-This library also provides method chaining and extra convenience methods. 
-
-=head1 NAME
-
-Test::WWW::Selenium::More - Useful methods for Selenium testing
-
-=head1 SYNPOSIS
+=head1 SYNOPSIS
 
     use Test::WWW::Selenium::More;
     Test::WWW::Selenium::More->new
@@ -349,6 +340,13 @@ Test::WWW::Selenium::More - Useful methods for Selenium testing
       ->open_ok("/") 
       ->is_text_present_ok("Welcome to the internet") 
       ->download_file_ok('link=Download my file');
+
+=head1 DESCRIPTION
+
+This library extends Test::WWW::Selenium.   Please see that module's
+documentation.
+
+This library also provides method chaining and extra convenience methods. 
 
 =head1 RUNNING TESTS
 
@@ -554,10 +552,6 @@ via javascript's XMLHttpRequest.  Checks that response status is 200.
 
 This just updates the slow() attribute.  The only difference is that it
 returns $self so that you can do method chaining. 
-
-=head1 AUTHOR
-
-Eric Johnson, kablamo at iijo dot nospamthankyew dot org
 
 =head1 AUTHOR
 

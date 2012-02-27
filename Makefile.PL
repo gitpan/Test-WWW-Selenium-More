@@ -9,7 +9,7 @@ use ExtUtils::MakeMaker 6.30;
 
 
 my %WriteMakefileArgs = (
-  "ABSTRACT" => "Useful methods for Selenium testing",
+  "ABSTRACT" => "More useful tools for Selenium testing",
   "AUTHOR" => "Eric Johnson <kablamo at iijo dot nospamthanks dot org>",
   "BUILD_REQUIRES" => {
     "English" => 0,
@@ -32,7 +32,7 @@ my %WriteMakefileArgs = (
     "Test::WWW::Selenium" => 0,
     "namespace::autoclean" => 0
   },
-  "VERSION" => "0.001",
+  "VERSION" => "0.002",
   "test" => {
     "TESTS" => "t/*.t"
   }

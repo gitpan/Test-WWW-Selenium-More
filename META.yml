@@ -1,5 +1,5 @@
 ---
-abstract: 'Useful methods for Selenium testing'
+abstract: 'More useful tools for Selenium testing'
 author:
   - 'Eric Johnson <kablamo at iijo dot nospamthanks dot org>'
 build_requires:
@@ -12,7 +12,7 @@ build_requires:
 configure_requires:
   ExtUtils::MakeMaker: 6.30
 dynamic_config: 0
-generated_by: 'Dist::Zilla version 4.300000, CPAN::Meta::Converter version 2.110440'
+generated_by: 'Dist::Zilla version 4.300009, CPAN::Meta::Converter version 2.113640'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -24,4 +24,4 @@ requires:
   Test::WWW::Selenium: 0
   namespace::autoclean: 0
   perl: 5.010
-version: 0.001
+version: 0.002
