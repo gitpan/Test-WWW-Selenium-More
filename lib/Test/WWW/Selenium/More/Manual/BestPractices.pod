@@ -4,13 +4,11 @@ package Test::WWW::Selenium::More::Manual::BestPractices;
 __END__
 =pod
 
+=encoding utf-8
+
 =head1 NAME
 
 Test::WWW::Selenium::More::Manual::BestPractices
-
-=head1 VERSION
-
-version 0.08
 
 =head1 NAME
 
@@ -60,7 +58,7 @@ Eric Johnson <kablamo at iijo dot nospamthanks dot org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2012 by Foxtons.
+This software is copyright (c) 2012 by Eric Johnson.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

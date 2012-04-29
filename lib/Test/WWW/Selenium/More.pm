@@ -1,14 +1,11 @@
 package Test::WWW::Selenium::More;
-{
-  $Test::WWW::Selenium::More::VERSION = '0.08';
-}
 
 use Carp;
 use Moose;
 use Test::WWW::Selenium;
 use namespace::autoclean;
 
-# ABSTRACT: More useful tools for Selenium testing
+our $VERSION = '0.09'; # VERSION
 
 
 has host    => ( is => 'rw', isa => 'Str', builder => '_host' );
@@ -21,9 +18,9 @@ has browser_url => (
     required => 1,
     lazy     => 1
 );
-has autostop => ( is => 'rw', isa => 'Bool', builder => '_autostop' );
-has slow     => ( is => 'rw', isa => 'Int', builder => '_slow' );
-has _stash => ( is => 'rw', isa => 'HashRef', default => sub { {} } );
+has autostop => ( is => 'rw', isa => 'Bool',    builder => '_autostop' );
+has slow     => ( is => 'rw', isa => 'Int',     builder => '_slow' );
+has _stash   => ( is => 'rw', isa => 'HashRef', default => sub { {} } );
 
 sub _host     { $ENV{SELENIUM_HOST}     || 'localhost' }
 sub _port     { $ENV{SELENIUM_PORT}     || 4444 }
@@ -31,7 +28,9 @@ sub _browser  { $ENV{SELENIUM_BROWSER}  || '*chrome' }
 sub _autostop { $ENV{SELENIUM_AUTOSTOP} || 1 }
 sub _slow     { $ENV{SELENIUM_SLOW}     || 0 }
 
-sub _browser_url { $ENV{SELENIUM_BROWSER_URL} || confess 'browser_url is required' }
+sub _browser_url {
+    $ENV{SELENIUM_BROWSER_URL} || confess 'browser_url is required';
+}
 
 # Delegation.  This effectively wraps Test::WWW::Selenium.
 # TODO I think this is kinda slow.  Or maybe Moose is always slow?
@@ -46,7 +45,7 @@ has selenium => (
 );
 
 sub _selenium {
-    my $self = shift;
+    my $self     = shift;
     my $selenium = Test::WWW::Selenium->new(
         port        => $self->port,
         host        => $self->host,
@@ -113,7 +112,6 @@ around wait_for_page_to_load => sub {
 __PACKAGE__->meta->make_immutable;
 
 
-
 sub load_data {
     my ( $self, $file ) = @_;
     die $! unless ( my @test_data = do $file );
@@ -138,11 +136,10 @@ sub follow_link_ok {
     $test_description .= $text
         if defined $text;
 
-    my $return_value = $self->click( $locator )
+    my $return_value = $self->click($locator)
         && $self->_wait_with_message();
 
-    Test::Most::ok($return_value, $test_description);
-    
+    Test::Most::ok( $return_value, $test_description );
 
     return $self;
 }
@@ -179,7 +176,7 @@ sub submit_form_ok {
         if $form->{click};
 
     if ( $form->{submit} ) {
-        $self->submit_ok( $form->{ submit } )
+        $self->submit_ok( $form->{submit} )
             && $self->_wait_with_message();
     }
 
@@ -192,7 +189,7 @@ sub wait_for_jquery_ok {
 
     $self->wait_for_condition_ok(
         'selenium.browserbot.getCurrentWindow().jQuery.active == 0',
-        $self->_timeout,                               #
+        $self->_timeout,                                 #
         'wait_for_jquery_to_load, ' . $self->_timeout    #
     );
 
@@ -209,7 +206,7 @@ sub jquery_select_ok {
 
 sub select_and_page_load_ok {
     my $self = shift;
-    $self->select_ok( @_ )
+    $self->select_ok(@_)
         && $self->wait_for_page_to_load_ok;
     return $self;
 }
@@ -286,8 +283,18 @@ sub download_file_ok {
     my $self    = shift or die;
     my $locator = shift or die;
     my $url     = $self->get_attribute( $locator . '@href' );
+
+    my $return_value = $self->get_eval(
+        qq{1 + 1},
+        $self->_timeout,    #
+        qq{downloading $url, } . $self->_timeout
+    );                      #
+    Test::Most::is( $return_value, 2,
+        qq{Download host is reachable: $return_value} )
+        or return $self;
+
     $self->run_script(
-        'function testDownload() {
+        'function seleniumDownloadFileOk() {
              var xmlhttp=new XMLHttpRequest();
              xmlhttp.open("GET","' . $url . '",false);
              xmlhttp.send("");
@@ -296,10 +303,11 @@ sub download_file_ok {
         $self->_timeout,                            #
         '0 downloading $url, ' . $self->_timeout    #
     );
+
     my $status = $self->get_eval(
-        qq{selenium.browserbot.getCurrentWindow().testDownload()},
+        'selenium.browserbot.getCurrentWindow().seleniumDownloadFileOk()',
         $self->_timeout,                            #
-        qq{downloading $url, } . $self->_timeout
+        "downloading ${url}" . $self->_timeout
     );                                              #
 
     Test::Most::is( $status, 200, qq{Download status: $status} );
@@ -308,13 +316,17 @@ sub download_file_ok {
 
 
 sub change_speed {
-    my $self    = shift or die;
+    my $self = shift or die;
     my $seconds = shift || 0;
     $self->slow($seconds);
     return $self;
 }
 
 1;
+
+# ABSTRACT: More tools for Selenium testing
+
+
 
 # I used this command to get the list of functions in WWW::Selenium:
 #    grep '=item $sel-' /usr/local/lib/perl/5.10.0/WWW/Selenium.pm
@@ -324,18 +336,17 @@ sub change_speed {
 
 =pod
 
+=encoding utf-8
+
 =head1 NAME
 
-Test::WWW::Selenium::More - More useful tools for Selenium testing
-
-=head1 VERSION
-
-version 0.08
+Test::WWW::Selenium::More - More tools for Selenium testing
 
 =head1 SYNOPSIS
 
     use Test::WWW::Selenium::More;
-    Test::WWW::Selenium::More->new
+
+    Test::WWW::Selenium::More->new()
       ->note('this is a test.  this is only a test.')
       ->open_ok("/") 
       ->is_text_present_ok("Welcome to the internet") 
@@ -343,71 +354,51 @@ version 0.08
 
 =head1 DESCRIPTION
 
-This library extends Test::WWW::Selenium.   Please see that module's
-documentation.
+If you are new to this module or Selenium testing in general, see the
+L<Test::WWW::Selenium::More::Manual>.
 
-This library also provides method chaining and extra convenience methods. 
+This module provides method chaining and some useful tools for Selenium
+testing.
 
-=head1 RUNNING TESTS
-
-See the RUNNING TESTS section of Test::WWW::Selenium::More::Manual.
-
-=head1 ENVIRONMENT VARIABLES
-
-The following environment variables will affect the behavior of this library.
-They correspond to the attributes below.
-
-=head2 SELENIUM_HOST
-
-=head2 SELENIUM_PORT
-
-=head2 SELENIUM_BROWSER
-
-=head2 SELENIUM_BROWSER_URL
-
-=head2 SELENIUM_TIMEOUT
-
-=head2 SELENIUM_AUTOSTOP
-
-=head2 SELENIUM_SLOW
+This library extends L<Test::WWW::Selenium>.   Please see that module's
+documentation as well.
 
 =head1 ATTRIBUTES
 
 =head2 host
 
-The hostname or ip address of the Selenium RC server
+The hostname or ip address of the Selenium server.  Defaults to 'localhost'.
 
 =head2 port
 
-The port of the Selenium RC server
+The port of the Selenium server.  Defaults to '4444'.
 
 =head2 browser
 
-The browser to run tests against on the Selenium RC server
+The browser to run tests against on the Selenium server.  Defaults to
+'*chrome'.
 
 =head2 browser_url
 
-The website to run tests against on the Selenium RC server
+The Selenium server runs tests against this website.  
 
 =head2 autostop
 
-If true, when $selenium goes out of scope, the browser will be automatically
-closed.  Otherwise you will need to call stop() explicitly to close the
-browser.
+When $selenium goes out of scope the browser will be automatically shut down if
+this attribute is set to true.  Otherwise stop() must be called explicitly.
+Defaults to 1.
 
 =head2 slow
 
 The number of seconds to sleep after each call to any Test::WWW::Selenium
 method.  This is useful for slowing down tests if you are watching them run in
-a browser.
-
-Defaults to 0.
+a browser.  Defaults to 0.
 
 =head2 stash
 
 A HashRef of saved values.  This behaves similar to the Catalyst stash.
 
-=head1 FUNCTIONS
+=head1 METHODS
 
 =head2 load_data( $file )
 
@@ -553,13 +544,33 @@ via javascript's XMLHttpRequest.  Checks that response status is 200.
 This just updates the slow() attribute.  The only difference is that it
 returns $self so that you can do method chaining. 
 
+=head1 ENVIRONMENT VARIABLES
+
+The following is a list of environment variables that affect the behavior of
+this library.  Each corresponds to an attribute (see the ATTRIBUTES
+section).
+
+=head2 SELENIUM_HOST
+
+=head2 SELENIUM_PORT
+
+=head2 SELENIUM_BROWSER
+
+=head2 SELENIUM_BROWSER_URL
+
+=head2 SELENIUM_TIMEOUT
+
+=head2 SELENIUM_AUTOSTOP
+
+=head2 SELENIUM_SLOW
+
 =head1 AUTHOR
 
 Eric Johnson <kablamo at iijo dot nospamthanks dot org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2012 by Foxtons.
+This software is copyright (c) 2012 by Eric Johnson.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

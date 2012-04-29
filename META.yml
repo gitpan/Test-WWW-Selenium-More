@@ -1,9 +1,10 @@
 ---
-abstract: 'More useful tools for Selenium testing'
+abstract: 'More tools for Selenium testing'
 author:
   - 'Eric Johnson <kablamo at iijo dot nospamthanks dot org>'
 build_requires:
-  English: 0
+  File::Find: 0
+  File::Temp: 0
   Test::More: 0
   Test::Most: 0
   WWW::Selenium::Util: 0
@@ -12,16 +13,47 @@ build_requires:
 configure_requires:
   ExtUtils::MakeMaker: 6.30
 dynamic_config: 0
-generated_by: 'Dist::Zilla version 4.300009, CPAN::Meta::Converter version 2.113640'
+generated_by: 'Dist::Zilla version 4.300015, CPAN::Meta::Converter version 2.120921'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
   version: 1.4
 name: Test-WWW-Selenium-More
+no_index:
+  directory:
+    - t
+    - xt
+    - examples
+    - corpus
+  package:
+    - DB
+provides:
+  Test::WWW::Selenium::More:
+    file: lib/Test/WWW/Selenium/More.pm
+    version: 0.09
+  Test::WWW::Selenium::More::Manual:
+    file: lib/Test/WWW/Selenium/More/Manual/WritingTests.pod
+    version: 0.09
+  Test::WWW::Selenium::More::Manual::BestPractices:
+    file: lib/Test/WWW/Selenium/More/Manual/BestPractices.pod
+    version: 0.09
+  Test::WWW::Selenium::More::Manual::ForTheImpatient:
+    file: lib/Test/WWW/Selenium/More/Manual/ForTheImpatient.pod
+    version: 0.09
+  Test::WWW::Selenium::More::Manual::InstallingSeleniumServer:
+    file: lib/Test/WWW/Selenium/More/Manual/InstallingSeleniumServer.pod
+    version: 0.09
+  Test::WWW::Selenium::More::Manual::RunningTests:
+    file: lib/Test/WWW/Selenium/More/Manual/RunningTests.pod
+    version: 0.09
 requires:
   Carp: 0
   Moose: 0
   Test::WWW::Selenium: 0
   namespace::autoclean: 0
   perl: 5.010
-version: 0.08
+resources:
+  bugtracker: https://github.com/kablamo/Test-WWW-Selenium-More/issues
+  homepage: https://github.com/kablamo/Test-WWW-Selenium-More
+  repository: https://github.com/kablamo/Test-WWW-Selenium-More.git
+version: 0.09
