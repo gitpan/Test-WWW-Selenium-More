@@ -1,4 +1,4 @@
-package Test::WWW::Selenium::More::Manual;
+package Test::WWW::Selenium::More::WritingTests;
 
 
 __END__
@@ -8,7 +8,7 @@ __END__
 
 =head1 NAME
 
-Test::WWW::Selenium::More::Manual
+Test::WWW::Selenium::More::WritingTests
 
 =head1 NAME
 
@@ -21,12 +21,12 @@ Test::WWW::Selenium::More::Manual - Testing with Selenium
     use Test::WWW::Selenium::More;
 
     my $s = Test::WWW::Selenium::More->new( 
-        host           => "localhost",
-        port           => 4444,
+        host           => "localhost", # selenium server host
+        port           => 4444,        # selenium server port
         browser        => "*firefox",
         browser_url    => "http://www.google.com",
-        default_names  => 1,
-        error_callback => sub { ... },
+        # default_names  => 1,           # TODO: not yet implemented
+        # error_callback => sub { ... }, # TODO: not yet implemented
     );
 
     $s->open_ok("http://www.google.com", undef, "fetched G's site alright");
@@ -40,13 +40,12 @@ Test::WWW::Selenium::More::Manual - Testing with Selenium
 
 =head1 COMPOSING YOUR TESTS USING ROLES
 
-Lets say you have decided to use Test::WWW::Selenium::More, but you want
-to add some of your own custom methods.  Instead of extending
-Test::WWW::Selenium::More, try grouping your methods by subject using Moose
-roles.  Here is an example.
+Lets say you decided to use Test::WWW::Selenium::More, but you want to add your
+own custom methods.  Instead of extending Test::WWW::Selenium::More, try
+grouping your methods by subject using Moose roles.  Here is an example.
 
     # Create a role
-    use MySeleniumRoles::Auth;
+    package MySeleniumRoles::Auth;
     use Moose::Role;
 
     sub login_ok {

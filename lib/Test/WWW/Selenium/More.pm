@@ -5,7 +5,7 @@ use Moose;
 use Test::WWW::Selenium;
 use namespace::autoclean;
 
-our $VERSION = '0.09'; # VERSION
+our $VERSION = '0.10'; # VERSION
 
 
 has host    => ( is => 'rw', isa => 'Str', builder => '_host' );
@@ -354,14 +354,15 @@ Test::WWW::Selenium::More - More tools for Selenium testing
 
 =head1 DESCRIPTION
 
-If you are new to this module or Selenium testing in general, see the
-L<Test::WWW::Selenium::More::Manual>.
-
 This module provides method chaining and some useful tools for Selenium
 testing.
 
-This library extends L<Test::WWW::Selenium>.   Please see that module's
-documentation as well.
+If you are new to this module or Selenium testing in general, see the
+L<Test::WWW::Selenium::More::Manual>.
+
+This library extends L<Test::WWW::Selenium>.   Method chaining is available for
+all Test::WWW::Selenium::More methods and all Test::WWW::Selenium methods whose
+names end in _ok, _is, _isnt or _like.  
 
 =head1 ATTRIBUTES
 
