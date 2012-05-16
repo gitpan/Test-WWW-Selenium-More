@@ -5,7 +5,7 @@ use Moose;
 use Test::WWW::Selenium;
 use namespace::autoclean;
 
-our $VERSION = '0.10'; # VERSION
+our $VERSION = '0.11'; # VERSION
 
 
 has host    => ( is => 'rw', isa => 'Str', builder => '_host' );
@@ -472,7 +472,7 @@ without submit buttons.
 
 Returns $self.
 
-This blocks until jQuery.active to return false.
+This blocks until jQuery.active returns false.
 
 =head2 jquery_select_ok($locator, $menu_option)
 

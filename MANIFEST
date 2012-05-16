@@ -10,7 +10,7 @@ lib/Test/WWW/Selenium/More.pm
 lib/Test/WWW/Selenium/More/Manual.pod
 lib/Test/WWW/Selenium/More/Manual/BestPractices.pod
 lib/Test/WWW/Selenium/More/Manual/ForTheImpatient.pod
-lib/Test/WWW/Selenium/More/Manual/InstallingSeleniumServer.pod
+lib/Test/WWW/Selenium/More/Manual/InstallingSelenium.pod
 lib/Test/WWW/Selenium/More/Manual/RunningTests.pod
 lib/Test/WWW/Selenium/More/Manual/WritingTests.pod
 t/00-compile.t

@@ -1,4 +1,4 @@
-package Test::WWW::Selenium::More::Manual::InstallingSeleniumServer;
+package Test::WWW::Selenium::More::Manual::InstallingSelenium;
 
 
 __END__
@@ -8,11 +8,11 @@ __END__
 
 =head1 NAME
 
-Test::WWW::Selenium::More::Manual::InstallingSeleniumServer
+Test::WWW::Selenium::More::Manual::InstallingSelenium
 
 =head1 NAME
 
-Test::WWW::Selenium::More::Manual::InstallingSeleniumServer
+Test::WWW::Selenium::More::Manual::InstallingSelenium
 
 =head1 INSTALL THE SELENIUM SERVER
 
