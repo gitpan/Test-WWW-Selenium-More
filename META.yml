@@ -13,7 +13,7 @@ build_requires:
 configure_requires:
   ExtUtils::MakeMaker: 6.30
 dynamic_config: 0
-generated_by: 'Dist::Zilla version 4.300015, CPAN::Meta::Converter version 2.120921'
+generated_by: 'Dist::Zilla version 4.300005, CPAN::Meta::Converter version 2.112621'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -30,25 +30,25 @@ no_index:
 provides:
   Test::WWW::Selenium::More:
     file: lib/Test/WWW/Selenium/More.pm
-    version: 0.11
+    version: 0.12
   Test::WWW::Selenium::More::Manual:
     file: lib/Test/WWW/Selenium/More/Manual.pod
-    version: 0.11
+    version: 0.12
   Test::WWW::Selenium::More::Manual::BestPractices:
     file: lib/Test/WWW/Selenium/More/Manual/BestPractices.pod
-    version: 0.11
+    version: 0.12
   Test::WWW::Selenium::More::Manual::ForTheImpatient:
     file: lib/Test/WWW/Selenium/More/Manual/ForTheImpatient.pod
-    version: 0.11
+    version: 0.12
   Test::WWW::Selenium::More::Manual::InstallingSelenium:
     file: lib/Test/WWW/Selenium/More/Manual/InstallingSelenium.pod
-    version: 0.11
+    version: 0.12
   Test::WWW::Selenium::More::Manual::RunningTests:
     file: lib/Test/WWW/Selenium/More/Manual/RunningTests.pod
-    version: 0.11
-  Test::WWW::Selenium::More::WritingTests:
+    version: 0.12
+  Test::WWW::Selenium::More::Manual::WritingTests:
     file: lib/Test/WWW/Selenium/More/Manual/WritingTests.pod
-    version: 0.11
+    version: 0.12
 requires:
   Carp: 0
   Moose: 0
@@ -59,4 +59,4 @@ resources:
   bugtracker: https://github.com/kablamo/Test-WWW-Selenium-More/issues
   homepage: https://github.com/kablamo/Test-WWW-Selenium-More
   repository: https://github.com/kablamo/Test-WWW-Selenium-More.git
-version: 0.11
+version: 0.12

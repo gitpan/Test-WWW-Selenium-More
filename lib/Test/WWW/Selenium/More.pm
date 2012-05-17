@@ -5,7 +5,7 @@ use Moose;
 use Test::WWW::Selenium;
 use namespace::autoclean;
 
-our $VERSION = '0.11'; # VERSION
+our $VERSION = '0.12'; # VERSION
 
 
 has host    => ( is => 'rw', isa => 'Str', builder => '_host' );

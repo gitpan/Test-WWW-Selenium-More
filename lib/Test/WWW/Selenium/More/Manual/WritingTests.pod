@@ -1,4 +1,4 @@
-package Test::WWW::Selenium::More::WritingTests;
+package Test::WWW::Selenium::More::Manual::WritingTests;
 
 
 __END__
@@ -8,7 +8,7 @@ __END__
 
 =head1 NAME
 
-Test::WWW::Selenium::More::WritingTests
+Test::WWW::Selenium::More::Manual::WritingTests
 
 =head1 NAME
 
